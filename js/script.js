@@ -28,7 +28,7 @@ function titleClickHandler(event){
   for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
   }
-  
+
   /* get 'href' attribute from the clicked link, MODULE 5.3 */
 
   const articleSelector = clickedElement.getAttribute('href');
@@ -52,7 +52,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles';
 
 function generateTitleLinks() {
-  
+
   /* remove contents of titleList, MODULE 5.4 */
 
   const titleList = document.querySelector(optTitleListSelector);
@@ -69,15 +69,15 @@ function generateTitleLinks() {
   for (let article of articles) {
 
     /* get the article id, MODULE 5.4 */
-    
+
     const articleId = article.getAttribute('id');
     console.log(articleId);
 
     /* find the title element, MODULE 5.4 */
     /* get the title from the title element, MODULE 5.4 */
-    
+
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-    
+
     /* create HTML of the link, MODULE 5.4 */
 
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
@@ -86,7 +86,7 @@ function generateTitleLinks() {
     /* insert link into titleList, MODULE 5.4 */
     /* insert link into html variable, MODULE 5.4 */
     /*titleList.innerHTML = titleList.innerHTML + linkHTML;*/
-    
+
     html = html + linkHTML;
   }
   titleList.innerHTML = html;
