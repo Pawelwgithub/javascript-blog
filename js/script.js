@@ -52,7 +52,9 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorsSelector = '.post-author',
-  optTagsListSelector = '.tags.list';
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = '5',
+  optCloudClassPrefix = 'tag-size-';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -104,11 +106,47 @@ for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
 
+/* CALCULATE TAGS PARAMS, MODULE 6.3 */
+
+function calculateTagsParams(tags){
+
+  const params = {
+    max: '0',
+    min: '999999'
+  };
+
+  for(let tag in tags){
+    console.log(tag + ' is used ' + tags[tag] + ' times');
+
+    if(tags[tag] > params.max){
+      params.max = tags[tag];
+    }
+    if(tags[tag] < params.min){
+      params.min = tags[tag];
+    }
+  }
+  
+  return params;
+
+}
+
+/* CALCULATE TAG CLASS, MODULE 6.3 */
+
+function calculateTagClass(count, params){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  const classValue = optCloudClassPrefix + classNumber;
+  console.log(classValue);
+  return classValue;
+}
+
 /* GENERATING TAGS, MODULE 6.2 */
 
 function generateTags(){
 
-  /* [NEW] create a new variable allTags with an empty object */
+  /* [NEW] create a new variable allTags with an empty object, MODULE 6.3 */
   
   let allTags = {};  
 
@@ -155,11 +193,11 @@ function generateTags(){
       html = html + linkHTML;
       console.log(html);
 
-      /* [NEW] check if this link is NOT already in allTags */
+      /* [NEW] check if this link is NOT already in allTags, MODULE 6.3 */
       
       if(!allTags.hasOwnProperty(tag)){
       
-        /* [NEW] add tag to allTags object */
+        /* [NEW] add tag to allTags object, MODULE 6.3 */
       
         allTags[tag] = 1;
       } else {
@@ -179,29 +217,38 @@ function generateTags(){
 
   }
 
-  /* [NEW] find list of tags in right column */
+  /* [NEW] find list of tags in right column, MODULE 6.3 */
 
   const tagList = document.querySelector('.tags');
 
-  /* [NEW] create variable for all links HTML code */
+  /* [NEW] create variable for all links HTML code, MODULE 6.3 */
+
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams);
 
   let allTagsHTML = '';
 
-  /* [NEW] START LOOP: for each tag in allTags: */
+  /* [NEW] START LOOP: for each tag in allTags:, MODULE 6.3 */
 
   for(let tag in allTags){
 
-    /* [NEW] generate code of a link and add it to allTagsHTML */
+    /* [NEW] generate code of a link and add it to allTagsHTML, MODULE 6.3 */
 
     // const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
 
-    allTagsHTML += '<li><a href="#tag-' + tag + '">' + tag + ' (' + allTags[tag] + ')' + '</a></li>';
+    // allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + ' (' + allTags[tag] + ')' + '</a></li>';
 
-    /* [NEW] END LOOP: for each tag in allTags: */
+    const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
+          
+    console.log('tagLinkHTML:', tagLinkHTML);
+
+    allTagsHTML += tagLinkHTML;
+
+    /* [NEW] END LOOP: for each tag in allTags:, MODULE 6.3 */
 
   }
   
-  /* [NEW] add html from allTagsHTML to tagList */
+  /* [NEW] add html from allTagsHTML to tagList, MODULE 6.3 */
   
   tagList.innerHTML = allTagsHTML;
   console.log(allTags);
@@ -273,7 +320,7 @@ function addClickListenersToTags(){
 
   /* find all links to tags, MODULE 6.2 */
 
-  const tagLinks = document.querySelectorAll('.tags .list a');
+  const tagLinks = document.querySelectorAll('.post-tags .list a');
   console.log(tagLinks);
 
   /* START LOOP: for each link, MODULE 6.2 */
@@ -403,7 +450,7 @@ function addClickListenersToAuthors(){
 
   /* find all links to authors, MODULE 6.2 */
 
-  const authorLinks = document.querySelectorAll('.author');
+  const authorLinks = document.querySelectorAll('.post-author a .list.authors a');
   console.log(authorLinks);
 
   /* START LOOP: for each link, MODULE 6.2 */

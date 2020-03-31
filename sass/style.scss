@@ -9,6 +9,12 @@ $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
 $font-text: 'Source Sans Pro', sans-serif;
 
+$tag-fs1: 100%;
+$tag-fs2: 130%;
+$tag-fs3: 160%;
+$tag-fs4: 190%;
+$tag-fs5: 220%;
+
 /* Global */
 
 *, *::before, *::after {
@@ -121,4 +127,31 @@ body {
   p {
     margin: 0 10px 0 0;
   }
+}
+
+/* Tags */
+
+.tags li {
+  display: inline-block;
+  line-height: normal;
+}
+
+.tag-size-1 {
+  font-size: $tag-fs1;
+}
+
+.tag-size-2 {
+  font-size: $tag-fs2;
+}
+
+.tag-size-3 {
+  font-size: $tag-fs3;
+}
+
+.tag-size-4 {
+  font-size: $tag-fs4;
+}
+
+.tag-size-5 {
+  font-size: $tag-fs5;
 }
