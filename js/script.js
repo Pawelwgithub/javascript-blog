@@ -1,6 +1,16 @@
 
 'use strict';
 
+/* MODULE 6.4 Handlebars */
+
+//const templates = {
+//   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+//   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML)
+//   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
+// }
+
+/* MODULE 6.3 */
+
 const opt = {
   articleSelector: '.post',
   titleSelector: '.post-title',
@@ -92,6 +102,9 @@ function generateTitleLinks(customSelector = ''){
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     console.log(linkHTML);
 
+    // const linkHTMLData = {id: articleId, title: articleTitle};
+    // const linkHTML = templates.articleLink(linkHTMLData);
+
     /* insert link into titleList, MODULE 5.4 */
     /* insert link into html variable, MODULE 5.4 */
     /*titleList.innerHTML = titleList.innerHTML + linkHTML;*/
@@ -103,12 +116,18 @@ function generateTitleLinks(customSelector = ''){
 
 generateTitleLinks();
 
-const links = document.querySelectorAll('.titles a');
-console.log(links);
+function addEventListenersToTitles(){
 
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
+  const links = document.querySelectorAll('.titles a');
+  console.log(links);
+
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
+  }
 }
+
+addEventListenersToTitles();
+
 
 /* CALCULATE TAGS PARAMS, MODULE 6.3 */
 
@@ -223,7 +242,9 @@ function generateTags(){
 
       /* [NEW] check if this link is NOT already in allTags, MODULE 6.3 */
       
-      if(!allTags.hasOwnProperty(tag)){
+      //if(!allTags.hasOwnProperty(tag)){
+
+      if(!Object.prototype.hasOwnProperty.call(allTags, tag)){
       
         /* [NEW] add tag to allTags object, MODULE 6.3 */
       
@@ -342,6 +363,8 @@ function tagClickHandler(event){
 
   generateTitleLinks('[data-tags~="' + tag + '"]');
 
+  addEventListenersToTitles();
+
 }
 
 function addClickListenersToTags(){
@@ -409,7 +432,9 @@ function generateAuthors(){
 
     /* [NEW] check if this link is NOT already in allAuthors, MODULE 6.3 */
       
-    if(!allAuthors.hasOwnProperty(articleAuthor)){
+    //if(!allAuthors.hasOwnProperty(articleAuthor)){
+
+    if(!Object.prototype.hasOwnProperty.call(allAuthors, articleAuthor)){
       
       /* [NEW] add author to allAuthors object, MODULE 6.3 */
     
@@ -524,6 +549,8 @@ function authorClickHandler(event){
   /* execute function "generateTitleLinks" with article selector as argument, MODULE 6.2 */
 
   generateTitleLinks('[data-author="' + author + '"]');
+
+  addEventListenersToTitles();
 
 }
 
