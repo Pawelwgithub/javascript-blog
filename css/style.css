@@ -119,18 +119,22 @@ body {
 }
 
 .tag-size-2 {
-  font-size: 130%;
+  font-size: 125%;
 }
 
 .tag-size-3 {
-  font-size: 160%;
+  font-size: 150%;
 }
 
 .tag-size-4 {
-  font-size: 190%;
+  font-size: 175%;
 }
 
 .tag-size-5 {
-  font-size: 220%;
+  font-size: 200%;
+}
+
+.tag-size-6 {
+  font-size: 225%;
 }
 /*# sourceMappingURL=style.css.map */

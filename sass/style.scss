@@ -10,10 +10,11 @@ $font-header: 'Oswald', sans-serif;
 $font-text: 'Source Sans Pro', sans-serif;
 
 $tag-fs1: 100%;
-$tag-fs2: 130%;
-$tag-fs3: 160%;
-$tag-fs4: 190%;
-$tag-fs5: 220%;
+$tag-fs2: 125%;
+$tag-fs3: 150%;
+$tag-fs4: 175%;
+$tag-fs5: 200%;
+$tag-fs6: 225%;
 
 /* Global */
 
@@ -154,4 +155,8 @@ body {
 
 .tag-size-5 {
   font-size: $tag-fs5;
+}
+
+.tag-size-6 {
+  font-size: $tag-fs6;
 }
