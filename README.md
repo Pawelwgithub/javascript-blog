@@ -1,1 +1,1 @@
-# javascript-blog
+https://pawelwgithub.github.io/javascript-blog
